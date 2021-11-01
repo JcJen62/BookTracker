@@ -1,0 +1,64 @@
+#search{
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 2rem;
+}
+
+h2{
+    text-align: center;
+}
+
+#searchItems{
+    list-style-type: none;
+    margin: 0 auto;
+    width: 30%;
+    margin-top: 0.5rem;
+}
+   
+#futureBooks{
+    margin: 0 auto;
+    width: 20%;
+    margin-top: 0.5rem;
+}
+
+#myBooks{
+    margin: 0 auto;
+    width: 30%;
+    margin-top: 0.5rem;
+}
+
+li{
+    flex-direction: row;
+    display: flex;
+    margin-top: 3px;
+    margin-bottom: 1rem;
+}
+
+.form-check-input{
+    margin-right: 0.7rem;
+}
+
+#addToLists{
+    margin: 0 auto;
+    width: 30%;
+}
+
+#addToRead{
+    margin-right: 0.5rem;
+}
+
+#bookText{
+    margin: 0.4rem;
+}
+
+.rating{
+    width: 8%;
+    height: 38px;
+    margin-left: 1rem;
+    margin-right: 0.7rem;
+}
+
+.submit{
+    height: 38px;
+    white-space: nowrap;
+}
