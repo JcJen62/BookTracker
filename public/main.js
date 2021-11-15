@@ -1,16 +1,22 @@
-let booksRead = [
-    {
-        "id": "test",
-        "name": "Cooking 101",
-        "rating": 5
-    }
-]
-let booksToRead = [
-    {
-        "id": "test",
-        "name": "Cooking for Pros"
-    }
-]
+const server = 'http://localhost:5000/api'
+
+async function FetchBooksRead() {
+    let bookRead = {}
+
+    await fetch(`${server}/booksRead`)
+        .then(response => response.json())
+        .then(data => bookRead = data);
+    return bookRead
+}
+
+async function FetchBooksToRead() {
+    let bookToRead = {}
+
+    await fetch(`${server}/booksToRead`)
+        .then(response => response.json())
+        .then(data => bookToRead = data);
+    return bookToRead
+}
 
 async function search(term) {
     var requestOptions = {
@@ -36,7 +42,7 @@ searchButton.addEventListener("click", async () => {
     if (searchTerm === "") {
         return
     }
-    let results =  await search(searchTerm)
+    let results = await search(searchTerm)
     if (results.docs.length === 0) {
         return
     }
@@ -46,33 +52,54 @@ searchButton.addEventListener("click", async () => {
 let readBooks = document.querySelector("#addToFinished")
 readBooks.addEventListener("click", () => {
     let checked = document.querySelectorAll(".form-check-input")
-    
+
     checked.forEach(element => {
-        if (element.checked){
-            booksRead.push({"id": element.id, "name": element.name, "rating": 0})
-        } 
+        if (element.checked) {
+            const addBooks = async (data) => {
+                const response = await fetch(`${server}/booksReadAdd`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+            }
+            addBooks({ "id": element.id, "name": element.name, "rating": 0 })
+        }
+
     })
 
     document.querySelector("#myBooks").innerHTML = ""
-    displayReadBooks(booksRead)
+    displayReadBooks()
 })
 
 let toReadBooks = document.querySelector("#addToRead")
 toReadBooks.addEventListener("click", () => {
     let checked = document.querySelectorAll(".form-check-input")
-    
+
     checked.forEach(element => {
-        if (element.checked){
-            booksToRead.push({"id": element.id, "name": element.name})
-        } 
+        if (element.checked) {
+            const addBooksToRead = async (data) => {
+                const response = await fetch(`${server}/booksToReadAdd`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+            }
+            addBooksToRead({ "id": element.id, "name": element.name })
+        }
     })
 
     document.querySelector("#futureBooks").innerHTML = ""
-    displayFutureBooks(booksToRead)
+    displayFutureBooks()
 })
 
-function displayReadBooks(arr){
-    arr.forEach(element => {
+async function displayReadBooks() {
+    let bookRead = await FetchBooksRead();
+
+    bookRead.forEach(element => {
         const itemDiv = document.createElement("li");
         itemDiv.classList.add("item-div");
 
@@ -95,7 +122,7 @@ function displayReadBooks(arr){
         subRating.setAttribute("id", `${element.id}`)
         subRating.type = "button"
         subRating.innerHTML = "Submit Rating"
-        
+
         itemDiv.appendChild(subRating)
 
         let list = document.querySelector("#myBooks");
@@ -107,17 +134,32 @@ function displayReadBooks(arr){
 
             let newRating = parseInt(ratingElm.value)
 
-            let book = booksRead.find(element => element.id === event.currentTarget.id)
-            book.rating = newRating
+            let book = {
+                "id": event.currentTarget.id,
+                "rating": newRating
+            }
+
+            const updateRating = async (data) => {
+                const response = await fetch(`${server}/booksReadEdit`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+            }
+            updateRating(book)
 
             document.querySelector("#myBooks").innerHTML = ""
-            displayReadBooks(booksRead)
+            displayReadBooks()
         })
     });
 }
 
-function displayFutureBooks(arr){
-    arr.forEach(element => {
+async function displayFutureBooks() {
+    let bookToRead = await FetchBooksToRead();
+
+    bookToRead.forEach(element => {
         const itemDiv = document.createElement("li");
         itemDiv.classList.add("item-div");
 
@@ -132,7 +174,7 @@ function displayFutureBooks(arr){
 
 function updateList(arr) {
     let filteredArr = arr.filter(x => x.type === 'work')
-    for(let i = 0; i < 30; i++){
+    for (let i = 0; i < 30; i++) {
         let element = filteredArr[i]
         const itemDiv = document.createElement("li");
         itemDiv.classList.add("item-div");
@@ -156,5 +198,5 @@ function updateList(arr) {
     }
 }
 
-displayFutureBooks(booksToRead)
-displayReadBooks(booksRead)
+displayFutureBooks()
+displayReadBooks()

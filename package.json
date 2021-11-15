@@ -1,0 +1,30 @@
+{
+  "name": "booktracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12",
+    "nodemon": "^2.0.15",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JcJen62/BookTracker.git"
+  },
+  "author": "Jeremy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JcJen62/BookTracker/issues"
+  },
+  "homepage": "https://github.com/JcJen62/BookTracker#readme"
+}
