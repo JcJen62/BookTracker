@@ -3,6 +3,7 @@ import path from "path";
 import apiRouter from './routes/api.routes.js';
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
+import { port, mongoUri } from './config.js'
 
 dotenv.config()
 
