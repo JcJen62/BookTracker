@@ -8,7 +8,7 @@ dotenv.config()
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname)
 const app = express();
-const port = 5000;
+const port = 8000;
 
 app.use(express.static('public'))
 app.use(express.json())
