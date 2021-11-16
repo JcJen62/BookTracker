@@ -1,9 +1,9 @@
-const server = 'http://localhost:8000/api'
+
 
 async function FetchBooksRead() {
     let bookRead = {}
 
-    await fetch(`${server}/booksRead`)
+    await fetch(`/api/booksRead`)
         .then(response => response.json())
         .then(data => bookRead = data);
     return bookRead
@@ -12,7 +12,7 @@ async function FetchBooksRead() {
 async function FetchBooksToRead() {
     let bookToRead = {}
 
-    await fetch(`${server}/booksToRead`)
+    await fetch(`/api/booksToRead`)
         .then(response => response.json())
         .then(data => bookToRead = data);
     return bookToRead
