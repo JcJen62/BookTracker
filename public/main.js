@@ -26,7 +26,7 @@ async function search(term) {
 
 
     let result = []
-    await fetch(`http://openlibrary.org/search.json?q=${encodeURI(term)}`, requestOptions)
+    await fetch(`https://openlibrary.org/search.json?q=${encodeURI(term)}`, requestOptions)
         .then(response => response.text())
         .then(res => {
             result = JSON.parse(res)
