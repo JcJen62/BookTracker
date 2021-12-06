@@ -21,7 +21,7 @@ app.use((req, res, next) =>{
 
 app.use(express.urlencoded({extended:true}))
 
-mongoose.connect(`${process.env.MONGO_URI}`, {
+mongoose.connect(`${mongoUri}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })

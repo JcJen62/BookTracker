@@ -56,7 +56,7 @@ readBooks.addEventListener("click", () => {
     checked.forEach(element => {
         if (element.checked) {
             const addBooks = async (data) => {
-                const response = await fetch(`${server}/booksReadAdd`, {
+                const response = await fetch(`api/booksReadAdd`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -80,7 +80,7 @@ toReadBooks.addEventListener("click", () => {
     checked.forEach(element => {
         if (element.checked) {
             const addBooksToRead = async (data) => {
-                const response = await fetch(`${server}/booksToReadAdd`, {
+                const response = await fetch(`api/booksToReadAdd`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -140,7 +140,7 @@ async function displayReadBooks() {
             }
 
             const updateRating = async (data) => {
-                const response = await fetch(`${server}/booksReadEdit`, {
+                const response = await fetch(`api/booksReadEdit`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
